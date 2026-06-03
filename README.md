@@ -17,12 +17,12 @@ Built entirely with Jetpack Compose
 
 Technologies Used:
 
-Kotlin
-Jetpack Compose
-Android Studio
-Material Design 3
-Android SDK
-Git & GitHub
+Kotlin | 
+ Jetpack Compose |
+ Android Studio |
+ Material Design 3 |
+ Android SDK | 
+ Git & GitHub 
 
 Learning Outcomes:
 
