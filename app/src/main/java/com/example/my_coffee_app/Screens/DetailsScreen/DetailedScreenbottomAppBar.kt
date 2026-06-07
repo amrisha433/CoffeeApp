@@ -84,7 +84,7 @@ fun DetailedScreenBottomAppBar(
         AppMessageDialogue(
             show = showCartDialog,
             title = "Added to Cart",
-            message = "Item has been added to your cart",
+            message = "Coffee added to your cart",
             onDismiss = { showCartDialog = false }
         )
     }
