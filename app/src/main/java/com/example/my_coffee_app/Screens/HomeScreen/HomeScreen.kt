@@ -29,10 +29,11 @@ import androidx.navigation.NavHostController
 import com.example.my_coffee_app.domain.Model.Product
 import com.example.my_coffee_app.R
 import com.example.my_coffee_app.ui_components.MyBottomNavBar
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
 //@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController, viewModel: CoffeeViewModel) {
     var location = "JSS Noida-62,UP,India"
     Scaffold(
         bottomBar = { MyBottomNavBar(navController,"Home") }
@@ -60,13 +61,13 @@ fun HomeScreen(navController: NavHostController) {
 
             // displaying product
             val products = listOf(
-                Product(id=1,"Espresso","Strong and Rich", R.drawable.coffee_2, 2.99),
-                Product(id=2,"Cappuccino","Smooth and Creamy", R.drawable.coffee_3, 3.99),
-                Product(id=3,"Latte","Creamy and Cold", R.drawable.coffee_4, 4.99),
-                Product(id=4,"Mocha","Espresso with Chocolate", R.drawable.coffee_5, 5.99),
-                Product(id=5,"Americano","Espresso Shot", R.drawable.coffee_6, 6.99),
-                Product(id=6,"Macchiato","Espresso with Foam", R.drawable.coffee_1, 7.99),
-                Product(id=7,"Iced Coffee","Cold and Iced", R.drawable.coffee_4, 8.99),
+                Product(id=1, name="Espresso", description="Strong and Rich", imageResource =R.drawable.coffee_2, price=2.99, category="Espresso"),
+                Product(id=2, name="Cappuccino", description="Smooth and Creamy", imageResource =R.drawable.coffee_3, price=3.99, category="Latte"),
+                Product(id=3, name="Latte", description="Creamy and Cold", imageResource =R.drawable.coffee_4, price=4.99, category="Latte"),
+                Product(id=4, name="Mocha", description="Espresso with Chocolate", imageResource =R.drawable.coffee_5, price=5.99, category="Latte"),
+                Product(id=5, name="Americano", description="Espresso Shot", imageResource =R.drawable.coffee_6, price=6.99, category="Americano"),
+                Product(id=6, name="Macchiato", description="Espresso with Foam", imageResource =R.drawable.coffee_1, price=7.99, category="Macchiato"),
+                Product(id=7, name="Iced Coffee", description="Cold and Iced", imageResource =R.drawable.coffee_4, price=8.99, category="Americano"),
             )
             ProductGrid(products = products,navController = navController){
                 Text(text = "Location",

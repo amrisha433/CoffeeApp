@@ -5,5 +5,6 @@ public data class Product(
     val name:String,
     val description:String,
     val imageResource:Int,
-    val price:Double
+    val price:Double,
+    val category: String
 )

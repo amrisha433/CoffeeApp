@@ -11,36 +11,36 @@ import com.example.my_coffee_app.Screens.FavoriteScreen.FavoritesScreen
 import com.example.my_coffee_app.Screens.HomeScreen.HomeScreen
 import com.example.my_coffee_app.Screens.ProfileScreen.ProfileScreen
 import com.example.my_coffee_app.Screens.WelcomeScreen.WelcomeScreen
-
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
 @Composable
-fun NavGraph() {
+fun NavGraph(viewModel: CoffeeViewModel) {
 
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = Routes.WelcomeScreen) {
-        composable <Routes.WelcomeScreen> {
+        composable<Routes.WelcomeScreen> {
             WelcomeScreen(navController)
         }
-        composable <Routes.HomeScreen> {
-            HomeScreen(navController)
+        composable<Routes.HomeScreen> {
+            HomeScreen(navController, viewModel)        // ← added viewModel
         }
-        composable <Routes.DetailsScreen> { backStackEntry ->
-            var args = backStackEntry.toRoute<Routes.DetailsScreen>()
-
-            DetailsScreen(productId = args.productId,navController)
+        composable<Routes.DetailsScreen> { backStackEntry ->
+            val args = backStackEntry.toRoute<Routes.DetailsScreen>()
+            DetailsScreen(
+                productId = args.productId,
+                navController = navController,
+                viewModel = viewModel                   // ← added viewModel
+            )
         }
         composable<Routes.CartScreen> {
-            CartScreen(navController)
+            CartScreen(navController, viewModel)        // ← added viewModel
         }
-        composable <Routes.FavoritesScreen>{
-            FavoritesScreen(navController)
-
+        composable<Routes.FavoritesScreen> {
+            FavoritesScreen(navController, viewModel)   // ← added viewModel
         }
-        composable <Routes.ProfileScreen>{
-            ProfileScreen(navController)
-
+        composable<Routes.ProfileScreen> {
+            ProfileScreen(navController)                // no viewModel needed
         }
-
     }
 }

@@ -24,14 +24,15 @@ import com.example.my_coffee_app.R
 import com.example.my_coffee_app.domain.Model.Product
 import com.example.my_coffee_app.ui.theme.LightBrown
 import com.example.my_coffee_app.ui_components.MyBottomNavBar
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
 //@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun CartScreen(navController: NavHostController) {
+fun CartScreen(navController: NavHostController, viewModel: CoffeeViewModel) {
     val CartProducts = listOf(
-        Product(id=1,"Espresso","Strong and Rich", R.drawable.coffee_2, 2.99),
-        Product(id=2,"Cappuccino","Smooth and Creamy", R.drawable.coffee_3, 3.99),
-        Product(id=3,"Latte","Creamy and Cold", R.drawable.coffee_4, 4.99)
+        Product(id=1,"Espresso","Strong and Rich", R.drawable.coffee_2, 2.99, category ="Espresso" ),
+        Product(id=2,"Cappuccino","Smooth and Creamy", R.drawable.coffee_3, 3.99, category = "Cappuccino"),
+        Product(id=3,"Latte","Creamy and Cold", R.drawable.coffee_4, 4.99, category = "Latte")
     )
     var amount by remember { mutableStateOf(12.50) }
     var deliveryFee by remember { mutableStateOf(1.00) }
