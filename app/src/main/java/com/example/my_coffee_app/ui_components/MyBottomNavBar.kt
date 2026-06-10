@@ -27,7 +27,7 @@ fun MyBottomNavBar(navController: NavHostController,routes: String) {
         NavItem(title = "Home", icon = R.drawable.regular_outline_home, Routes.HomeScreen),
         NavItem(title = "Cart", icon = R.drawable.regular_outline_bag, Routes.CartScreen),
         //NavItem(title = "Search", icon = R.drawable.regular_outline_search),
-        NavItem(title = "Favorite", icon = R.drawable.regular_outline_heart, Routes.FavoritesScreen),
+        NavItem(title = "Favorites", icon = R.drawable.regular_outline_heart, Routes.FavoritesScreen),
         NavItem("Profile", icon = R.drawable.outline_account_circle_24,Routes.ProfileScreen)
         )
     NavigationBar(

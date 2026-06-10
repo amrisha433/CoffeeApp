@@ -21,7 +21,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.BiasAbsoluteAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -29,19 +28,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.clickable
 import com.example.my_coffee_app.R
 import com.example.my_coffee_app.domain.Model.Product
 import com.example.my_coffee_app.ui.theme.IvoryWhite
+import com.example.my_coffee_app.ui.theme.LightBrown
 import com.example.my_coffee_app.ui.theme.LightGray
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
-//@Preview
 @Composable
-fun ProductDetailContent(product: Product, innerPadding: PaddingValues) {
-
+fun ProductDetailContent(
+    product: Product,
+    innerPadding: PaddingValues,
+    viewModel: CoffeeViewModel          // ✅ added viewModel
+) {
     var selectedSizeText by remember { mutableStateOf("M") }
+
+    // ✅ Check if favorite
+    val isFavorite = viewModel.isFavorite(product)
 
     Column(
         modifier = Modifier
@@ -53,47 +59,38 @@ fun ProductDetailContent(product: Product, innerPadding: PaddingValues) {
                 bottom = innerPadding.calculateBottomPadding()
             )
     ) {
-
-        // 🔹 Image
         Image(
             painter = painterResource(product.imageResource),
             contentDescription = "Product Image",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(260.dp) // reduced from 260
+                .height(260.dp)
                 .clip(RoundedCornerShape(20.dp))
-                .shadow(10.dp, RoundedCornerShape(20.dp))
-            ,
-        contentScale = ContentScale.Crop
+                .shadow(10.dp, RoundedCornerShape(20.dp)),
+            contentScale = ContentScale.Crop
         )
-
-        Spacer(modifier = Modifier.height(4.dp)) // reduced
-
-        // 🔹 Title + Tag Row
+        Spacer(modifier = Modifier.height(4.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-
             Column {
                 Text(
                     text = product.name,
-                    fontSize = 26.sp, // reduced
+                    fontSize = 26.sp,
                     fontWeight = FontWeight.Bold
                 )
-
                 Spacer(modifier = Modifier.height(6.dp))
-
                 Text(
                     text = "Ice / Hot",
-                    fontSize = 14.sp, // reduced
+                    fontSize = 14.sp,
                     color = Color.DarkGray
                 )
             }
-
             Icon(
                 painter = painterResource(R.drawable.default_bean),
-                contentDescription = "Bean",
+                contentDescription = "Favorite",
+                tint = if (isFavorite) Color.Red else LightBrown, // ✅ red if favorite
                 modifier = Modifier
                     .size(44.dp)
                     .background(
@@ -101,60 +98,47 @@ fun ProductDetailContent(product: Product, innerPadding: PaddingValues) {
                         shape = RoundedCornerShape(12.dp)
                     )
                     .padding(8.dp)
+                    .clickable { viewModel.toggleFavorite(product) } // ✅ toggle favorite
             )
         }
-
-        Spacer(modifier = Modifier.height(26.dp)) // reduced
-
+        Spacer(modifier = Modifier.height(26.dp))
         HorizontalDivider(color = Color.Gray.copy(alpha = 0.4f))
-
-        Spacer(modifier = Modifier.height(36.dp)) // reduced
-
-        // 🔹 Description Section
+        Spacer(modifier = Modifier.height(36.dp))
         Text(
             text = "Description",
-            fontSize = 22.sp, // reduced
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold
         )
-
         Spacer(modifier = Modifier.height(8.dp))
-
         Text(
             text = product.description,
             fontSize = 15.sp,
             color = Color(0xFF444444),
             lineHeight = 22.sp,
-            maxLines = 2 // added
+            maxLines = 2
         )
-
-        Spacer(modifier = Modifier.height(26.dp)) // reduced from 24
-
-        // 🔹 Size Section
+        Spacer(modifier = Modifier.height(26.dp))
         Text(
             text = "Size",
-            fontSize = 22.sp, // reduced
+            fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold
         )
-
         Spacer(modifier = Modifier.height(12.dp))
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             listOf("S", "M", "L").forEach { size ->
-
                 SelectSizeChip(
                     sizeText = size,
                     selected = selectedSizeText == size,
                     onClick = { selectedSizeText = size },
                     modifier = Modifier
                         .weight(1f)
-                        .height(49.dp) // reduced from 50
+                        .height(49.dp)
                 )
             }
         }
-
         Spacer(modifier = Modifier.height(16.dp))
     }
 }

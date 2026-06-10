@@ -107,7 +107,15 @@ fun ProfileScreen(navController: NavHostController) {
                 ) {
                     Spacer(modifier = Modifier.height(12.dp))
                     Row(modifier = Modifier.fillMaxWidth()
-                        .clickable{navController.navigate(Routes.CartScreen)}
+                        .clickable {
+                            navController.navigate(Routes.CartScreen) {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
                     ) {
                         Icon(imageVector = Icons.Default.ShoppingCart,
                             contentDescription = "Cart",
@@ -122,7 +130,15 @@ fun ProfileScreen(navController: NavHostController) {
                     }
                     Spacer(modifier = Modifier.height(12.dp))
                     Row(modifier = Modifier.fillMaxWidth()
-                        .clickable{navController.navigate(Routes.FavoritesScreen)}
+                        .clickable {
+                            navController.navigate(Routes.FavoritesScreen) {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
                     ) {
                         Icon(imageVector = Icons.Default.Favorite,
                             contentDescription = "favorite",
