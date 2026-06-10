@@ -23,6 +23,8 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,19 +36,22 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.my_coffee_app.Navigation.Routes
-import com.example.my_coffee_app.domain.Model.Product
 import com.example.my_coffee_app.R
+import com.example.my_coffee_app.domain.Model.Product
 import com.example.my_coffee_app.ui.theme.IvoryWhite
 import com.example.my_coffee_app.ui.theme.LightBrown
 import com.example.my_coffee_app.ui.theme.LightGray
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
-//@Preview
 @Composable
 fun ProductCard(
     products: Product,
-    modifier: Modifier=Modifier,
-    navController: NavController
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    viewModel: CoffeeViewModel        // ✅ added viewModel
 ) {
+    // ✅ Check if product is favorite
+    val isFavorite = viewModel.isFavorite(products)
 
     Card(
         modifier = modifier
@@ -54,16 +59,13 @@ fun ProductCard(
             .padding(8.dp)
             .clickable {
                 navController.navigate(Routes.DetailsScreen(products.id))
-            }
-        ,shape = RoundedCornerShape(16.dp),
+            },
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = LightGray
         ),
-    ){
-
-        Column(
-            modifier = Modifier.padding(8.dp)
-        ) {
+    ) {
+        Column(modifier = Modifier.padding(8.dp)) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -81,33 +83,37 @@ fun ProductCard(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(8.dp)
-                        .background(color = LightGray.copy(0.7f),
-                            shape = RoundedCornerShape(8.dp))
+                        .background(
+                            color = LightGray.copy(0.7f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
                         .padding(horizontal = 8.dp, vertical = 4.dp)
-
-
+                        .clickable { viewModel.toggleFavorite(products) } // ✅ toggle favorite
                 ) {
-                    Icon(painter = painterResource(R.drawable.regular_outline_heart),
-                        contentDescription = "Favorite ",
-                        tint = LightBrown,
-                        modifier= Modifier.size(24.dp))
+                    Icon(
+                        painter = painterResource(
+                            // ✅ filled heart if favorite, outline if not
+                            if (isFavorite) R.drawable.regular_outline_heart
+                            else R.drawable.regular_outline_heart
+                        ),
+                        contentDescription = "Favorite",
+                        tint = if (isFavorite) Color.Red else LightBrown, // ✅ red if favorite
+                        modifier = Modifier.size(24.dp)
+                    )
                 }
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text=products.name,
+                text = products.name,
                 style = MaterialTheme.typography.titleMedium.copy(
                     color = Color.Black,
                     fontWeight = FontWeight.SemiBold
-
                 )
             )
             Text(
-                text=products.description,
+                text = products.description,
                 style = MaterialTheme.typography.bodySmall.copy(
-                    color = Color.DarkGray.copy(0.8f),
-                    //fontWeight = FontWeight.SemiBold
-
+                    color = Color.DarkGray.copy(0.8f)
                 ),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
@@ -125,14 +131,15 @@ fun ProductCard(
                         color = LightBrown
                     )
                 )
-                IconButton(onClick = {},
-                    modifier = Modifier
-                        .background(
-                            color = LightBrown,
-                            shape = RoundedCornerShape(10.dp),
-                        )
-                    ) {
-                    Icon(imageVector = Icons.Default.Add,
+                IconButton(
+                    onClick = { viewModel.addToCart(products) }, // ✅ add to cart
+                    modifier = Modifier.background(
+                        color = LightBrown,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
                         contentDescription = "Add to cart",
                         tint = IvoryWhite
                     )

@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,73 +32,60 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.my_coffee_app.R
 import com.example.my_coffee_app.ui.theme.LightBrown
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
 @Composable
-fun PaymentModeSelectionCard(totalAmount: Double) {
+fun PaymentModeSelectionCard(
+    totalAmount: Double,
+    viewModel: CoffeeViewModel          // ✅ added viewModel
+) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedMode by remember { mutableStateOf("Online") }
-    var paymentModes = listOf("Online", "Cash on Delivery")
+    val paymentModes = listOf("Online", "Cash on Delivery")
+
+    // ✅ Payment method from ViewModel
+    val selectedMode by viewModel.paymentMethod.collectAsState()
 
     Card(modifier = Modifier.fillMaxWidth()) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
+        Column(modifier = Modifier.padding(16.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
-
-
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(painter = painterResource(
-                        if (selectedMode == "Online") {
-                            R.drawable.mobile_banking
-                        } else {
-                            R.drawable.wallet
-                        }
-                    ),
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        painter = painterResource(
+                            if (selectedMode == "Online") R.drawable.mobile_banking
+                            else R.drawable.wallet
+                        ),
                         contentDescription = "Payment",
-                        modifier = Modifier.size(30.dp)
-                        , tint = LightBrown
+                        modifier = Modifier.size(30.dp),
+                        tint = LightBrown
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Column() {
-                        Text(selectedMode,
+                    Column {
+                        Text(
+                            selectedMode,
                             fontSize = 24.sp,
-                            style = MaterialTheme.typography.bodyMedium.copy(
-                                fontWeight = FontWeight.SemiBold
-                            )
+                            style = MaterialTheme.typography.bodyMedium
+                                .copy(fontWeight = FontWeight.SemiBold)
                         )
                         Spacer(modifier = Modifier.height(4.dp))
-                        if(selectedMode=="Online"){
-                            Text(
-                                text = "$ $totalAmount",
-                                fontSize = 20.sp,
-                                color = LightBrown,
-                                style = MaterialTheme.typography.bodyMedium
-
-                            )
-                        }else{
-                            Text(
-                                text = "$ ${totalAmount+1.0}",
-                                fontSize = 20.sp,
-                                color = LightBrown,
-                                style = MaterialTheme.typography.bodyMedium
-
-                            )
-                        }
+                        Text(
+                            text = if (selectedMode == "Online") "$ ${"%.2f".format(totalAmount)}"
+                            else "$ ${"%.2f".format(totalAmount + 1.0)}",
+                            fontSize = 20.sp,
+                            color = LightBrown,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
                     }
                 }
-                Box{
+                Box {
                     Icon(
                         painter = painterResource(R.drawable.regular_outline_arrow_down),
                         contentDescription = "change Payment mode",
@@ -108,23 +96,24 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                     DropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false }
-                    ){
+                    ) {
                         paymentModes.forEach { mode ->
                             DropdownMenuItem(
-                                text = { Text(text = mode,
-                                    style = MaterialTheme.typography.bodyLarge) },
+                                text = {
+                                    Text(
+                                        text = mode,
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                },
                                 onClick = {
-                                    selectedMode = mode
+                                    viewModel.setPaymentMethod(mode) // ✅ ViewModel handles
                                     expanded = false
                                 },
                                 leadingIcon = {
                                     Icon(
                                         painter = painterResource(
-                                            if (mode == "Online") {
-                                                R.drawable.mobile_banking
-                                            } else {
-                                                R.drawable.wallet
-                                            }
+                                            if (mode == "Online") R.drawable.mobile_banking
+                                            else R.drawable.wallet
                                         ),
                                         contentDescription = null,
                                         tint = LightBrown,
@@ -134,9 +123,9 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                                 modifier = Modifier
                                     .padding(horizontal = 4.dp)
                                     .background(
-                                        color =
-                                            if (selectedMode == mode) LightBrown.copy(alpha = 0.2f)
-                                            else Color.Transparent
+                                        color = if (selectedMode == mode)
+                                            LightBrown.copy(alpha = 0.2f)
+                                        else Color.Transparent
                                     )
                             )
                         }
@@ -145,14 +134,11 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
-                onClick = { },
+                onClick = { viewModel.placeOrder() }, // ✅ clears cart
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(55.dp)
-                    .shadow(
-                        10.dp,
-                        RoundedCornerShape(20.dp)
-                    ),
+                    .shadow(10.dp, RoundedCornerShape(20.dp)),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFD17842)
@@ -162,12 +148,12 @@ fun PaymentModeSelectionCard(totalAmount: Double) {
                     pressedElevation = 4.dp
                 )
             ) {
-                Text(text = "Place Order",
+                Text(
+                    text = "Place Order",
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold)
+                    fontWeight = FontWeight.SemiBold
+                )
             }
-            //Spacer(modifier = Modifier.height(26.dp))
         }
     }
 }
-

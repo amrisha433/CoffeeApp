@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.my_coffee_app.domain.Model.Product
+import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
 //@Preview
 @Composable
 fun ProductGrid(
     products: List<Product>,
     navController: NavController,
+    viewModel: CoffeeViewModel,
     topContent: @Composable () -> Unit
 ) {
     LazyColumn(
@@ -36,13 +38,15 @@ fun ProductGrid(
                 ProductCard(
                     products = rowItems[0],
                     modifier = Modifier.weight(1f),
-                    navController = navController
+                    navController = navController,
+                    viewModel = viewModel
                 )
                 if (rowItems.size == 2) {
                     ProductCard(
                         products = rowItems[1],
                         modifier = Modifier.weight(1f),
-                        navController = navController
+                        navController = navController,
+                        viewModel = viewModel
                     )
                 }else{
                     Spacer(modifier = Modifier.weight(1f))
