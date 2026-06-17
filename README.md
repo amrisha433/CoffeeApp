@@ -6,6 +6,9 @@
 ![Architecture](https://img.shields.io/badge/Architecture-MVVM-purple)
 ![Design](https://img.shields.io/badge/Design-Material%203-red)
 
+<img width="1774" height="887" alt="ChatGPT Image Jun 18, 2026 at 02_40_02 AM" src="https://github.com/user-attachments/assets/1965f1c9-f547-4f23-9c1b-65661f5cf411" />
+
+
 AI Coffee Ordering App is a modern Android application built with Kotlin and Jetpack Compose that provides an elegant coffee browsing and ordering experience.
 The application allows users to discover coffee products through an AI-powered recommendation interface, explore coffee categories, manage favorites, add products to a shopping cart, select payment methods, and place orders through a clean and intuitive user interface.
 Designed using modern Android development practices, the project demonstrates multi-screen navigation, state management, reusable UI components, and responsive Material 3 design principles.
