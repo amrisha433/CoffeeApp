@@ -89,7 +89,7 @@ fun ProfileScreen(navController: NavHostController) {
                 fontWeight = FontWeight.SemiBold
             )
             Spacer(modifier = Modifier.height(12.dp))
-            Text(text = "JSS College, Noida-62,\nGautambuddha Nagar\nUP 201309",
+            Text(text = "XYZ College, Noida,\nUnKnown Nagar\nUP 20XXXX",
                 //style = MaterialTheme.typography.bodyLarge,
                 //color = Color.DarkGray,
                 fontSize = 20.sp,

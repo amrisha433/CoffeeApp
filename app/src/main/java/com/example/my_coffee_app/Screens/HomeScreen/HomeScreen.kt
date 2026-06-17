@@ -38,7 +38,7 @@ import com.example.my_coffee_app.viewmodel.CoffeeViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: CoffeeViewModel) {
-    var location = "JSS Noida-62,UP,India"
+    var location = "XYZ College, Noida,UP 20XXXX"
 
     // ✅ Get products from ViewModel
     val products by viewModel.products.collectAsState()

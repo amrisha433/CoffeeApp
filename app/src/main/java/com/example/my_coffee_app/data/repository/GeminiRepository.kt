@@ -14,8 +14,6 @@ class GeminiRepository {
     suspend fun getCoffeeSuggestion(mood: String): String {
         return try {
 
-            Log.d("Gemini", BuildConfig.GEMINI_API_KEY)
-
             val prompt = """
                 You are a friendly coffee expert.
                 Based on the mood: "$mood"
@@ -34,7 +32,7 @@ class GeminiRepository {
             if (e.message?.contains("503") == true) {
                 return "AI service is busy right now. Please try again in a few seconds."
             }
-            return "Error: ${e.message}"
+            return "Sorry, our AI barista is busy right now. Please try again!"
         }
     }
 }

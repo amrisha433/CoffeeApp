@@ -141,9 +141,10 @@ fun AiScreen(
                             onClick = {
                                 val coffeeName = suggestion
                                     .lines()
-                                    .firstOrNull { it.startsWith("Coffee:") }
-                                    ?.removePrefix("Coffee:")
-                                    ?.trim() ?: ""
+                                    .firstOrNull { it.contains("Coffee:") }
+                                    ?.substringAfter("Coffee:")
+                                    ?.trim()
+                                    ?: ""
                                 // find product and add to cart
                                 coffeeViewModel.products.value
                                     .find { it.name.contains(coffeeName, ignoreCase = true) }
