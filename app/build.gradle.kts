@@ -1,3 +1,4 @@
+import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -5,13 +6,13 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")version "2.3.20"
 }
 
+val localProperties = Properties()
+localProperties.load(rootProject.file("local.properties").inputStream())
+
 android {
     namespace = "com.example.my_coffee_app"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.my_coffee_app"
@@ -21,6 +22,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String",
+            "GEMINI_API_KEY",
+            "\"${localProperties.getProperty("GEMINI_API_KEY")}\""
+        )
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -72,8 +83,13 @@ dependencies {
 
     debugImplementation("androidx.compose.ui:ui-tooling")
 
+    //navigation
     implementation("androidx.navigation:navigation-compose:2.9.7")
 
+    //serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.10.0")
+
+    //generative AI
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
 
 }

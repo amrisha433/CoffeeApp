@@ -3,7 +3,7 @@ package com.example.my_coffee_app.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.my_coffee_app.domain.Model.Product
-import com.example.my_coffee_app.domain.Model.data.repository.CoffeeRepository
+import com.example.my_coffee_app.data.repository.CoffeeRepository
 import kotlinx.coroutines.flow.*
 
 

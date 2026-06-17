@@ -1,5 +1,9 @@
 package com.example.my_coffee_app.Screens.HomeScreen
 
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import com.example.my_coffee_app.Navigation.Routes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -62,6 +66,18 @@ fun HomeScreen(navController: NavHostController, viewModel: CoffeeViewModel) {
                 .padding(14.dp)
                 .padding(innerPadding)
         ) {
+            Button(
+                onClick = { navController.navigate(Routes.AiScreen) },
+                modifier = Modifier
+                    .fillMaxWidth().height(55.dp)
+                    .padding(bottom = 12.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFFB5763A)
+                )
+            ) {
+                Text("✨ AI Coffee Suggestion", fontWeight = FontWeight.Bold)
+            }
             // ✅ products from ViewModel now
             ProductGrid(products = products, viewModel= viewModel,navController = navController) {
                 Text(
