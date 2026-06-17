@@ -9,9 +9,9 @@
 <img width="1774" height="887" alt="ChatGPT Image Jun 18, 2026 at 02_40_02 AM" src="https://github.com/user-attachments/assets/1965f1c9-f547-4f23-9c1b-65661f5cf411" />
 
 
-AI Coffee Ordering App is a modern Android application built with Kotlin and Jetpack Compose that provides an elegant coffee browsing and ordering experience.
-The application allows users to discover coffee products through an AI-powered recommendation interface, explore coffee categories, manage favorites, add products to a shopping cart, select payment methods, and place orders through a clean and intuitive user interface.
-Designed using modern Android development practices, the project demonstrates multi-screen navigation, state management, reusable UI components, and responsive Material 3 design principles.
+Coffee App is a modern Android application built with Kotlin and Jetpack Compose, designed to provide a seamless and engaging coffee ordering experience. The app allows users to explore a variety of coffee products, browse different categories, view detailed product information, manage favorites, add items to a shopping cart, and choose from multiple payment options before placing an order.
+
+To enhance the user experience, the application also includes an AI-powered coffee suggestion feature that recommends coffee based on the user's mood and preferences. Built using modern Android development practices, the project demonstrates multi-screen navigation, state management, reusable UI components, Material 3 design principles, and responsive layouts. The application focuses on delivering a clean, intuitive, and visually appealing user interface while showcasing practical Android development skills and real-world app functionality.
 
 ### 🤖 AI Coffee Suggestion Screen
 
