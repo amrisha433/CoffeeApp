@@ -151,9 +151,13 @@ AI-inspired coffee recommendation section integrated into the home screen.
 
 ## 🏠 Home Screen
 
-Browse coffee products, categories, and featured content.
+*Browse coffee products, categories, and featured content. 
+*FEATURES: Add to Cart and Add to Favorites.
+*Scrollable Screen
 
-![Home Screen](screenshots/home_screen.png)
+<img width="264" height="538" alt="Screenshot 2026-06-18 at 1 54 24 AM" src="https://github.com/user-attachments/assets/f92d9f7d-f40a-41b2-83e5-03f3b7dd3e52" />
+
+<img width="260" height="543" alt="Screenshot 2026-06-18 at 1 54 35 AM" src="https://github.com/user-attachments/assets/afa47152-8f83-4cbd-a709-30c9dfb971b1" />
 
 ---
 
@@ -161,7 +165,11 @@ Browse coffee products, categories, and featured content.
 
 Explore different coffee types through category selection.
 
-![Categories](screenshots/categories.png)
+<img width="256" height="539" alt="Screenshot 2026-06-18 at 1 51 27 AM" src="https://github.com/user-attachments/assets/83400d5e-8d5a-417a-af0e-d40f82232a94" />
+
+<img width="246" height="538" alt="Screenshot 2026-06-18 at 1 51 39 AM" src="https://github.com/user-attachments/assets/c0c49b24-199b-4ff8-8ee6-5962ef7e7467" />
+
+<img width="250" height="535" alt="Screenshot 2026-06-18 at 1 51 53 AM" src="https://github.com/user-attachments/assets/db2d2aba-0ad2-47fb-8938-edabb8dec316" />
 
 ---
 
