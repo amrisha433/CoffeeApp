@@ -169,7 +169,10 @@ Explore different coffee types through category selection.
 
 View product information, pricing, and size options.
 
-![Coffee Details](screenshots/details_screen.png)
+<img width="256" height="538" alt="Screenshot 2026-06-18 at 1 46 57 AM" src="https://github.com/user-attachments/assets/150f2365-95a0-4c13-8be6-ea74edfa73db" />
+
+<img width="257" height="541" alt="Screenshot 2026-06-18 at 1 47 08 AM" src="https://github.com/user-attachments/assets/f5c4b945-3de1-4c17-ba78-f4af7e3b3aa0" />
+
 
 ---
 
@@ -194,7 +197,9 @@ Review selected items and manage quantities.
 
 Choose a preferred payment method before placing an order.
 
-![Payment Screen](screenshots/payment_method.png)
+<img width="250" height="528" alt="Screenshot 2026-06-18 at 1 49 11 AM" src="https://github.com/user-attachments/assets/acf6d724-9e15-4301-86a4-df719e9ed815" />
+
+<img width="254" height="536" alt="Screenshot 2026-06-18 at 1 48 58 AM" src="https://github.com/user-attachments/assets/e71000b1-0b96-43b8-be71-76c932b2b4f0" />
 
 ---
 
