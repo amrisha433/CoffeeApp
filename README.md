@@ -53,7 +53,7 @@ Features:
 * Size selection
 * Favorite option
 * Add to Cart functionality
-
+  
 ---
 
 ### ❤️ Favorites Management
